@@ -17,7 +17,7 @@ fun readData() = buildList {
 	}
 }
 
-fun List.median(): Double {
+fun List<Double>.median(): Double {
 	// Sort the list and find the median value
 	val sortedList = this.sorted()
 	val size = sortedList.size
@@ -28,3 +28,24 @@ fun List.median(): Double {
 	}
 }
 
+fun List<Double>.displayStatistics() {
+	// Print the statistics: count, min, max, sum, average, median
+	if (this.isEmpty()) {
+		println("No data available to display statistics.")
+		return
+	}
+	val min = this.min() ?: 0.0
+	val max = this.max() ?: 0.0
+	val mean = this.average()
+	val median = this.median()
+
+	println("Min: $min")
+	println("Max: $max")
+	println("Average: %.2f".format(mean))
+	println("Median: $median")
+}
+
+fun main() {
+	val data = readData()
+	data.displayStatistics()
+}
