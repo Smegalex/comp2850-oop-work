@@ -77,10 +77,10 @@ class WordleTest : StringSpec({
             "Incorrectly positioned letter X is not marked if there is already correctly " +
                 "positioned letter X anywhere in the message and no other X are present in target word",
         ) {
-            evaluateGuess("potit", "posit") shouldBe listOf(2, 2, 0, 2, 2,)
+            evaluateGuess("potit", "posit") shouldBe listOf(2, 2, 0, 2, 2)
         }
         withClue(
-            "Only the first incorrectly positioned letter X should be marked as 1 if there " + 
+            "Only the first incorrectly positioned letter X should be marked as 1 if there " +
                 "is only 1 letter X in target word",
         ) {
             evaluateGuess("oppit", "posit") shouldBe listOf(1, 1, 0, 2, 2)
