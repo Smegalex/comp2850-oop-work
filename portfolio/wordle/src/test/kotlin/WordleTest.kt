@@ -29,10 +29,10 @@ class WordleTest : StringSpec({
 
     // readWordList() tests
     "Word list can be read from a correct file" {
-        withClue("Check correct return type") { 
-            readWordList("data/words.txt").shouldBeInstanceOf<MutableList<String>>() 
+        withClue("Check correct return type") {
+            readWordList("data/words.txt").shouldBeInstanceOf<MutableList<String>>()
         }
-        withClue("Check length of return") { readWordList("data/words.txt") shouldHaveSize(2315) }
+        withClue("Check length of return") { readWordList("data/words.txt") shouldHaveSize 2315 }
     }
     "Reading from non existent file throws a NoSuchFileException" {
         shouldThrow<NoSuchFileException> { readWordList("data/wordList.txt") }
@@ -64,19 +64,31 @@ class WordleTest : StringSpec({
     }
     "Correct letters in incorrect position are evaluated correctly" {
         withClue("Only incorrect positions") { evaluateGuess("tposi", "posit") shouldBe listOf(1, 1, 1, 1, 1) }
-        withClue("Some letters are in correct positions") { 
-            evaluateGuess("psoit", "posit") shouldBe listOf(2, 1, 1, 2, 2) 
+        withClue("Some letters are in correct positions") {
+            evaluateGuess("psoit", "posit") shouldBe listOf(2, 1, 1, 2, 2)
         }
-        withClue("Incorrectly positioned letter X is not marked if there is already correctly positioned letter X before it in the word and no other X are present in target word") {
+        withClue(
+            "Incorrectly positioned letter X is not marked if there is " +
+                "already correctly positioned letter X before it in the word and no other X are present in target word",
+        ) {
             evaluateGuess("posts", "posit") shouldBe listOf(2, 2, 2, 1, 0)
         }
-        withClue("Incorrectly positioned letter X is not marked if there is already correctly positioned letter X anywhere in the message and no other X are present in target word") {
+        withClue(
+            "Incorrectly positioned letter X is not marked if there is already correctly " +
+                "positioned letter X anywhere in the message and no other X are present in target word",
+        ) {
             evaluateGuess("potit", "posit") shouldBe listOf(2, 2, 0, 2, 2,)
         }
-        withClue("Only the first incorrectly positioned letter X should be marked as 1 if there is only 1 letter X in target word") {
+        withClue(
+            "Only the first incorrectly positioned letter X should be marked as 1 if there " + 
+                "is only 1 letter X in target word",
+        ) {
             evaluateGuess("oppit", "posit") shouldBe listOf(1, 1, 0, 2, 2)
         }
-        withClue("If there are 2 instances of letter X in target word and there is 2 incorrectly positioned letters X in guess both should be marked with 1") {
+        withClue(
+            "If there are 2 instances of letter X in target word and there is 2" +
+                "incorrectly positioned letters X in guess both should be marked with 1",
+        ) {
             evaluateGuess("sopts", "posst") shouldBe listOf(1, 2, 1, 1, 1)
         }
     }

@@ -2,7 +2,7 @@ import kotlin.system.exitProcess
 import java.nio.file.NoSuchFileException
 
 const val MAX_ATTEMPTS = 6
-const val SUM_OF_CORRECTLY_PLACED_LETTERS = 5*2
+const val SUM_OF_CORRECTLY_PLACED_LETTERS = 5 * 2
 
 fun main() {
 	val wordListFileName = "data/words.txt"
@@ -10,7 +10,7 @@ fun main() {
 	try {
 		wordList = readWordList(wordListFileName)
 	} catch (e: NoSuchFileException) {
-		println("Word list file not found.")
+		println("Word list file not found: " + e)
 		exitProcess(1)
 	}
 
@@ -26,15 +26,15 @@ fun main() {
 			correctnessList = evaluateGuess(guess, correctAnswer)
 			displayGuess(guess, correctnessList)
             // check if all the letters have been placed correctly
-			if (correctnessList.sum() == SUM_OF_CORRECTLY_PLACED_LETTERS) { 
+			if (correctnessList.sum() == SUM_OF_CORRECTLY_PLACED_LETTERS) {
 				guessed = true
 				break
 			}
 		}
 		if (guessed) {
-			println(green + bold + "Congratulations! You guessed the word!" + reset)
+			println(GREEN + BOLD + "Congratulations! You guessed the word!" + RESET)
 		} else {
-			println(RED + bold + "You are out of guesses:(" + reset + "\nThe word was" + bold + " $correctAnswer" + reset + ".")
+			println(RED + BOLD + "You are out of guesses:(" + RESET + "\nThe word was" + BOLD + " $correctAnswer" + RESET + ".")
 		}
 		println("Play again? (y/n)")
 		print(": ")
@@ -42,11 +42,11 @@ fun main() {
 }
 
 fun welcomeMessage(maxAttempts: Int) {
-	println(bold + "Welcome to Wordle!" + reset)
+	println(BOLD + "Welcome to Wordle!" + RESET)
 	println("The program selects a random word from a list of 5 letter english words.")
 	println("You will have up to $maxAttempts attempts to guess the word.")
 	println("Only 5 letter words are accepted as guesses.")
-	println("The program will mark correctly guessed letters in the correct spot as " + green + "GREEN" + reset + ".")
-	println("Meanwhile correctly guessed letters in the wrong spot will be marked " + yellow + "YELLOW" + reset + ".")
+	println("The program will mark correctly guessed letters in the correct spot as " + GREEN + "GREEN" + RESET + ".")
+	println("Meanwhile correctly guessed letters in the wrong spot will be marked " + YELLOW + "YELLOW" + RESET + ".")
 	println("Good luck!\n")
 }
