@@ -1,3 +1,4 @@
+import java.nio.file.NoSuchFileException
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.assertions.withClue
 import io.kotest.core.spec.style.StringSpec
@@ -7,7 +8,6 @@ import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.types.shouldBeInstanceOf
-import java.nio.file.NoSuchFileException
 
 @Suppress("unused")
 class WordleTest : StringSpec({
@@ -27,7 +27,7 @@ class WordleTest : StringSpec({
         withClue("6 letters") { isValid("SIXSIX") shouldBe false }
     }
 
-    // readWordList() tests
+    // readWordList() tests TODO: small file to faster tests
     "Word list can be read from a correct file" {
         withClue("Check correct return type") {
             readWordList("data/words.txt").shouldBeInstanceOf<MutableList<String>>()
